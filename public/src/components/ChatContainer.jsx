@@ -10,7 +10,7 @@ export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-
+// fetching data from the 
   useEffect(async () => {
     const data = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -40,7 +40,7 @@ export default function ChatContainer({ currentChat, socket }) {
     socket.current.emit("send-msg", {
       to: currentChat._id,
       from: data._id,
-      msg,
+      msg
     });
     await axios.post(sendMessageRoute, {
       from: data._id,
@@ -95,7 +95,7 @@ export default function ChatContainer({ currentChat, socket }) {
                 }`}
               >
                 <div className="content ">
-                  <p>{message.message}</p>
+                  <p>{message.message} <span className="timestamp">{message.time}</span></p>
                 </div>
               </div>
             </div>
@@ -150,6 +150,19 @@ const Container = styled.div`
         border-radius: 1rem;
       }
     }
+  .timestamp {
+    font-family: 'Arial', sans-serif; /* Clean font */
+    font-size: 10px; /* Set font size */
+    color: ; /* Subtle color */
+    padding: 5px 5px; /* Add padding */
+    margin-left: 5px;
+    border: 1px solid; /* Thin border */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: inline-block; /* Ensure compact styling */
+    text-align: center; /* Center-align text inside the box */
+    float: right; /* Align the timestamp to the extreme right */
+}
     .message {
       display: flex;
       align-items: center;
